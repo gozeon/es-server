@@ -1,9 +1,19 @@
 const db = require('../database')
 
-exports.getAll = async () => {
-  return await db('event_project')
+exports.getAll = async ({ id, name }) => {
+  const query = db('event_project')
     .select('*')
     .orderBy('create_at', 'desc')
+
+  if (id) {
+    query.where('id', 'like', `%${id}%`)
+  }
+
+  if (name) {
+    query.where('name', 'like', `%${name}%`)
+  }
+
+  return query.debug()
 }
 
 exports.getOne = async id => {

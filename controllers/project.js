@@ -4,7 +4,7 @@ const service = require('../services/project')
 
 exports.getAll = async (req, res, next) => {
   try {
-    const result = await service.getAll()
+    const result = await service.getAll(req.query)
     res.json({
       statusCode: 200,
       message: 'ok',
