@@ -3,11 +3,11 @@ const _ = require('lodash')
 
 module.exports = {
   get: options => async (req, res, next) => {
-    const projectSchema = Joi.object().keys({
+    const schema = Joi.object().keys({
       id: Joi.number().default(''),
       name: Joi.string().default(''),
     })
-    const result = Joi.validate(req.query, projectSchema)
+    const result = Joi.validate(req.query, schema)
 
     if (_.isNull(result.error)) {
       req.query = result.value
@@ -20,11 +20,11 @@ module.exports = {
     }
   },
   new: options => async (req, res, next) => {
-    const projectSchema = Joi.object().keys({
+    const schema = Joi.object().keys({
       name: Joi.string().required(),
       description: Joi.string(),
     })
-    const result = Joi.validate(req.body, projectSchema)
+    const result = Joi.validate(req.body, schema)
 
     if (_.isNull(result.error)) {
       next()
@@ -36,11 +36,11 @@ module.exports = {
     }
   },
   update: options => async (req, res, next) => {
-    const projectSchema = Joi.object().keys({
+    const schema = Joi.object().keys({
       name: Joi.string().optional(),
       description: Joi.string().optional(),
     })
-    const result = Joi.validate(req.body, projectSchema)
+    const result = Joi.validate(req.body, schema)
 
     if (_.isNull(result.error)) {
       next()

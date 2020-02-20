@@ -1,19 +1,23 @@
 const router = require('express').Router()
-const bodyParser = require('body-parser')
 const controller = require('../controllers/project')
 const middleware = require('../middlewares')
 
-router.get('/', middleware.auth(), middleware.project.get(), controller.getAll)
-router.get('/:id', middleware.auth(), controller.getById)
+router.get(
+  '/',
+  middleware.auth.verify(),
+  middleware.project.get(),
+  controller.getAll
+)
+router.get('/:id', middleware.auth.verify(), controller.getById)
 router.post(
   '/',
-  middleware.auth(),
+  middleware.auth.verify(),
   middleware.project.new(),
   controller.creatOne
 )
 router.put(
   '/:id',
-  middleware.auth(),
+  middleware.auth.verify(),
   middleware.project.update(),
   controller.updateById
 )
