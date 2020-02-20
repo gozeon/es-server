@@ -1,7 +1,15 @@
 const db = require('../database')
 
 exports.getAll = async () => {
-  return await db('event_project').select('*')
+  return await db('event_project')
+    .select('*')
+    .orderBy('create_at', 'desc')
+}
+
+exports.getOne = async id => {
+  return await db('event_project')
+    .select('*')
+    .where('id', id)
 }
 
 exports.createOne = async project => {

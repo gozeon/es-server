@@ -1,32 +1,17 @@
 const moment = require('moment')
 const _ = require('lodash')
-const service = require('../services/project')
+const service = require('../services/event')
 
 exports.getAll = async (req, res, next) => {
   try {
-    const result = await service.getAll()
-    res.json({
-      statusCode: 200,
-      message: 'ok',
-      data: _.forEach(result, item => {
-        item.create_at = moment(item.create_at).format('YYYY-MM-DD HH:mm:ss')
-      }),
-    })
-  } catch (err) {
-    res.json({
-      statusCode: 500,
-      message: err.message,
-    })
-  }
-}
+    const result = await service.getAll(req.query)
 
-exports.getById = async (req, res, next) => {
-  try {
-    const result = await service.getOne(req.params.id)
     res.json({
       statusCode: 200,
       message: 'ok',
       data: _.forEach(result, item => {
+        item.start = moment(item.start).format('YYYY-MM-DD HH:mm:ss')
+        item.end = moment(item.end).format('YYYY-MM-DD HH:mm:ss')
         item.create_at = moment(item.create_at).format('YYYY-MM-DD HH:mm:ss')
       }),
     })

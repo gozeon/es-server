@@ -4,6 +4,7 @@ const controller = require('../controllers/project')
 const middleware = require('../middlewares')
 
 router.get('/', middleware.auth(), controller.getAll)
+router.get('/:id', middleware.auth(), controller.getById)
 router.post(
   '/',
   middleware.auth(),
