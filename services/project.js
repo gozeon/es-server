@@ -13,7 +13,7 @@ exports.getAll = async ({ id, name }) => {
     query.where('name', 'like', `%${name}%`)
   }
 
-  return query.debug()
+  return query
 }
 
 exports.getOne = async id => {

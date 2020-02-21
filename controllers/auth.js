@@ -1,5 +1,6 @@
 const axios = require('axios')
 const jwt = require('jsonwebtoken')
+const _ = require('lodash')
 
 exports.login = async (req, res, next) => {
   try {
@@ -13,7 +14,7 @@ exports.login = async (req, res, next) => {
         statusCode: 200,
         message: 'ok',
         data: {
-          token: jwt.sign(req.body, process.env.SECRET, {
+          token: jwt.sign(_.pick(req.body, ['username']), process.env.SECRET, {
             expiresIn: 60 * 60,
           }),
         },

@@ -22,7 +22,7 @@ module.exports = {
   new: options => async (req, res, next) => {
     const schema = Joi.object().keys({
       name: Joi.string().required(),
-      description: Joi.string(),
+      description: Joi.string().allow(''),
     })
     const result = Joi.validate(req.body, schema)
 
