@@ -25,7 +25,7 @@ exports.login = async (req, res, next) => {
         message: response.data.errstr,
       })
     }
-  } catch (e) {
+  } catch (err) {
     res.json({
       statusCode: 500,
       message: err.message,
